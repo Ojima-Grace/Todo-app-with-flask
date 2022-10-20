@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+</head>
+<body>
+    <div>
+        <header>
+            <p id="page-title">TODO APP</p>
+        </header>
+    </div>
+    <main>
+        <br>
+        <br>
+        <div>
+            <form action="/add" method="post">
+                <label for="title">Title</label>
+                <br>
+                <input type="text" id="title" name="title" placeholder="write your todo...">
+                <br><br>
+                <button type="submit">Add</button>
+            </form>
+            <br><br>
+            {% for todo in todo_list %}
+            <div id="content">
+                <p id="display">{{todo.id}} | {{todo.title}}</p>
+                {% if todo.complete == False %}
+                <span id="complete">Undone</span>
+                {% else %}
+                <span id="not-complete">Done</span>
+                {% endif %}
+                <a href="/update/{{todo.id}}" id="update">Update</a>
+                <a href="/delete/{{todo.id}}" id="delete">Delete</a>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+</body>
+</html>
